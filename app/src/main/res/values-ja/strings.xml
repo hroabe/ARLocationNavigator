@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_cancel">中止</string>
+    <string name="button_register">登録</string>
+    <string name="button_search">検索</string>
+    <string name="edittext_hint_register_fragment_name">地点の名前</string>
+    <string name="edittext_hint_searchbox">検索したい地名等</string>
+    <string name="label_register_fragment_address">住所</string>
+    <string name="label_register_fragment_location">座標</string>
+    <string name="label_register_fragment_name">名前</string>
+    <string name="label_register_fragment_sea_level">標高を登録する</string>
+    <string name="label_register_fragment_title">登録</string>
+    <string name="label_register_fragment_color">色</string>
+    <string name="menu_open_source_license">オープンソースライセンス</string>
+    <string name="menu_list_location">地点リスト</string>
+    <string name="label_register_fragment_color_select">選択</string>
+    <string name="label_color_picker_dialog_title">色を選んでください</string>
+</resources>

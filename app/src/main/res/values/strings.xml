@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name" translatable="false">MyFirstARCoreLocationApp</string>
+    <string name="action_license" translatable="false">License</string>
+    <string name="label_license_notification" translatable="false">appoly/ARCore-Location</string>
+    <string name="error" translatable="false">Error</string>
+
+    <string name="menu_open_source_license">OpenSourceLicense</string>
+    <string name="menu_list_location">Location List</string>
+    <string name="edittext_hint_searchbox">Search Location</string>
+
+    <string name="button_search">Search</string>
+    <string name="button_register">Register</string>
+    <string name="button_cancel">Cancel</string>
+
+    <string name="label_register_fragment_title">Register Location</string>
+
+    <string name="label_register_fragment_name">Name</string>
+    <string name="label_register_fragment_location">Location</string>
+    <string name="label_register_fragment_address">Address</string>
+    <string name="label_register_fragment_sea_level">Register sea level (m)</string>
+    <string name="label_register_fragment_color">Color</string>
+    <string name="edittext_hint_register_fragment_name">Location name</string>
+    <string name="label_register_fragment_color_select">Select</string>
+    <string name="label_color_picker_dialog_title">Choose the color</string>
+
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.55"
+        >
+        <com.google.ar.sceneform.ArSceneView
+            android:id="@+id/ar_scene_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            app:titleTextColor="@color/colorDialogTitle"
+            app:title=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:alpha="0.8"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:onClick="onClickRegisterLocation"
+            android:alpha="0.7"
+            android:layout_marginEnd="5dp"
+            android:textSize="@dimen/map_register_button"
+            app:cornerRadius="10dp"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            app:icon="@drawable/ic_create"
+            android:text="@string/button_register"/>
+
+
+    </FrameLayout>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="0.45"
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.MapFragment"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorDialogTitle"
+            android:alpha="0.8"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:textSize="@dimen/map_search_text_size"
+                android:hint="@string/edittext_hint_searchbox" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                app:cornerRadius="10dp"
+                android:onClick="onMapSearch"
+                android:textSize="@dimen/map_search_text_size"
+                app:icon="@drawable/ic_search"
+                android:text="@string/button_search"
+                 />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/address_text_size"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

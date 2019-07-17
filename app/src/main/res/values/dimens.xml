@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="map_register_button">13sp</dimen>
+    <dimen name="map_search_text_size">13sp</dimen>
+    <dimen name="address_text_size">11sp</dimen>
+    <dimen name="register_location_text_size">13sp</dimen>
+</resources>

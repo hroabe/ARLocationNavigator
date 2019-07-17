@@ -1,7 +1,10 @@
 # ARLocationNavigator
 appoly/ARCore-LocationとGoogleMapを使った位置情報アプリです。
 
-
+<div >
+<img src="https://github.com/hroabe/ARLocationNavigator/blob/master/app/src/main/assets/screenshot/cap1.jpg" height=500 />
+<img src="https://github.com/hroabe/ARLocationNavigator/blob/master/app/src/main/assets/screenshot/cap2.jpg" height=500 />
+</div>
 
 ## 使用方法
 Google MAP API キーを取得して、下記のファイルにセットする必要があります。

@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 true,
                                 0xFF0088FF);
         }
+
         // サンプルのMarkerを地図とAR空間にに追加
         for (LocationInfo info: locInfo) {
             LatLng lng = new LatLng(info.getLatitude(),info.getLongitude());
@@ -192,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     true,
                     0xFF0088FF);
         }
+
         // GeoJSON生成のサンプルのMarkerを地図とAR空間にに追加
         for (LocationInfo info: locInfoFromGeoJSON) {
             LatLng lng = new LatLng(info.getLatitude(),info.getLongitude());
@@ -772,7 +774,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (locationScene == null) {
             // If our locationScene object hasn't been setup yet, this is a good time to do it
             // We know that here, the AR components have been initiated.
-        locationScene = new LocationScene(this, arSceneView);
+            locationScene = new LocationScene(this, arSceneView);
         }
 
         Frame frame = arSceneView.getArFrame();

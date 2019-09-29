@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -52,7 +53,11 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
 import com.google.maps.model.ElevationResult;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -62,6 +67,8 @@ import java.util.concurrent.ExecutionException;
 import uk.co.appoly.arcorelocation.LocationMarker;
 import uk.co.appoly.arcorelocation.LocationScene;
 import uk.co.appoly.arcorelocation.utils.ARLocationPermissionHelper;
+
+import static android.content.res.AssetManager.*;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback  {
 
@@ -77,6 +84,43 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private final LocationInfo[] locInfo = {
             new LocationInfo("甲府駅",138.568788,35.666692),
             new LocationInfo("静岡駅",138.388897,34.971759),
+    };
+
+    /* サンプル表示のLocationViewその2 from GeoJSON */
+    private LocationInfo[] locInfoFromGeoJSON = {
+            /* これらは後にJSONの内容に上書きされる．コンストラクタは未実装 */
+            new LocationInfo("甲府駅GeoJSON",138.,35.),
+            new LocationInfo("静岡駅GeoJSON",138.,34.),
+    };
+    // GeoJSON形式読み込み用の関数(loadJSONFromAsset, setGeoJSONSamples)
+    // ローカルフォルダのJSONを読み，locInfoFromGeoJSONの2要素に書き込む
+    private AssetManager assetManager;
+    private JSONObject sampleJSONObjects;
+    public String loadJSONFromAsset(AssetManager assetManager) {
+        String json = null;
+        try {
+            InputStream is = assetManager.open("JSONSamples/coordsSample.JSON");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+    void setGeoJSONSamples(LocationInfo[] locInfoFromGeoJSON, JSONObject sampleJSONObjects){
+        int i = 0;
+        for (LocationInfo info: locInfoFromGeoJSON){
+            try {
+                info.setLocationFromGeoJSON(sampleJSONObjects.getJSONArray("features").getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            i = i+1;
+        }
     };
 
     /* GoogleMapオブジェクト */
@@ -139,7 +183,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 true,
                                 0xFF0088FF);
         }
-
+        // サンプルのMarkerを地図とAR空間にに追加
+        for (LocationInfo info: locInfo) {
+            LatLng lng = new LatLng(info.getLatitude(),info.getLongitude());
+            createLocationMarker(lng,
+                    info.getName(),
+                    false,
+                    true,
+                    0xFF0088FF);
+        }
+        // GeoJSON生成のサンプルのMarkerを地図とAR空間にに追加
+        for (LocationInfo info: locInfoFromGeoJSON) {
+            LatLng lng = new LatLng(info.getLatitude(),info.getLongitude());
+            createLocationMarker(lng,
+                    info.getName(),
+                    false,
+                    true,
+                    0xFF0088FF);
+        }
         // 現在地表示ボタンを有効にする
         enableMyLocation();
     }
@@ -523,6 +584,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.toolbar_main));
 
+        // JSONSamples/coordSample.JSONからサンプルデータを読み込み，
+        // locInfoFromGeoJSONに格納
+        assetManager = this.getResources().getAssets();
+        try {
+            sampleJSONObjects = new JSONObject(loadJSONFromAsset(assetManager));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setGeoJSONSamples(locInfoFromGeoJSON, sampleJSONObjects);
+
         // バーのタイトルを消去
         ActionBar bar =  getSupportActionBar();
         if (bar != null){
@@ -701,7 +772,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (locationScene == null) {
             // If our locationScene object hasn't been setup yet, this is a good time to do it
             // We know that here, the AR components have been initiated.
-            locationScene = new LocationScene(this, arSceneView);
+        locationScene = new LocationScene(this, arSceneView);
         }
 
         Frame frame = arSceneView.getArFrame();

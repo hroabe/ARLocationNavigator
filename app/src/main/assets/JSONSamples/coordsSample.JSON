@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"name": "ニューヨーク"},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96957397460938,
+          40.773261878622634
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"name": "山中湖"},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          138.87714385986328,
+          35.41787347631587
+        ]
+      }
+    }
+  ]
+}
